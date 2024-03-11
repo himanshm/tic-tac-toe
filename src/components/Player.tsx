@@ -3,9 +3,10 @@ import { ChangeEvent, useState } from 'react';
 type PlayerProps = {
   initialName: string;
   symbol: string;
+  isActive: boolean;
 };
 
-function Player({ initialName, symbol }: PlayerProps) {
+function Player({ initialName, symbol, isActive }: PlayerProps) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -32,7 +33,7 @@ function Player({ initialName, symbol }: PlayerProps) {
     btnCaption = 'Save';
   }
   return (
-    <li>
+    <li className={isActive ? 'active' : undefined}>
       <span className='player'>
         {player}
         <span className='player-symbol'>{symbol}</span>

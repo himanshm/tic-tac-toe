@@ -1,6 +1,10 @@
 import { useState } from 'react';
+import { CellValue } from '../App';
 
-type CellValue = 'X' | 'O' | null;
+type GameBoardProps = {
+  onSelectSquare: () => void;
+  activePlayerSymbol: CellValue;
+};
 
 const initialGameBoard: CellValue[][] = [
   [null, null, null],
@@ -8,8 +12,8 @@ const initialGameBoard: CellValue[][] = [
   [null, null, null],
 ];
 
-function GameBoard() {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
+function GameBoard({ onSelectSquare, activePlayerSymbol }: GameBoardProps) {
+  const [gameBoard, setGameBoard] = useState<CellValue[][]>(initialGameBoard);
 
   function handleSelectSquare(rowIndex: number, colIndex: number) {
     setGameBoard((prevGameBoard) => {
@@ -17,9 +21,11 @@ function GameBoard() {
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
       console.log(updatedBoard);
-      updatedBoard[rowIndex][colIndex] = 'X';
+      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
       return updatedBoard;
     });
+
+    onSelectSquare();
   }
   return (
     <ol id='game-board'>
