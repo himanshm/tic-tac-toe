@@ -13,19 +13,27 @@ export type Turn = {
   player: CellValue;
 };
 
+function deriveActivePlayer(gameTurns: Turn[]): CellValue {
+  let currentPlayer: CellValue = 'X';
+
+  if (gameTurns.length > 0 && gameTurns[0].player === 'X') {
+    currentPlayer = 'O';
+  }
+
+  return currentPlayer;
+}
+
 function App() {
   const [gameTurns, setGameTurns] = useState<Turn[]>([]);
-  const [activePlayer, setActivePlayer] = useState<CellValue>('X');
+  // const [activePlayer, setActivePlayer] = useState<CellValue>('X');
+
+  const activePlayer = deriveActivePlayer(gameTurns);
 
   function handleSelectSquare(rowIndex: number, colIndex: number) {
-    setActivePlayer((curActivePlayer) => (curActivePlayer === 'X' ? 'O' : 'X'));
+    // setActivePlayer((curActivePlayer) => (curActivePlayer === 'X' ? 'O' : 'X'));
 
     setGameTurns((prevTurns) => {
-      let currentPlayer: CellValue = 'X';
-
-      if (prevTurns.length > 0 && prevTurns[0].player === 'X') {
-        currentPlayer = 'O';
-      }
+      const currentPlayer = deriveActivePlayer(prevTurns);
 
       const updatedTurns = [
         {
