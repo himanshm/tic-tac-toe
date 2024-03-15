@@ -45,10 +45,7 @@ function App() {
   return (
     <main>
       <div id='game-container'>
-        <ol
-          id='players'
-          className='highlight-player'
-        >
+        <ol id='players' className='highlight-player'>
           <Player
             initialName='Player1'
             symbol='X'
@@ -60,12 +57,9 @@ function App() {
             isActive={activePlayer === 'O'}
           />
         </ol>
-        <GameBoard
-          onSelectSquare={handleSelectSquare}
-          turns={gameTurns}
-        />
+        <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns} />
       </div>
-      <Log />
+      <Log turns={gameTurns} />
     </main>
   );
 }
