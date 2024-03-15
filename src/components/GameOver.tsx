@@ -1,7 +1,5 @@
-import { CellValue } from '../App';
-
 type GameOverProps = {
-  winner: CellValue;
+  winner: string | null;
   onRestart: () => void;
 };
 

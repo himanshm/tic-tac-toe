@@ -2,16 +2,21 @@ import { ChangeEvent, useState } from 'react';
 
 type PlayerProps = {
   initialName: string;
-  symbol: string;
+  symbol: 'X' | 'O';
   isActive: boolean;
+  onChangeName: (playerSymbol: 'X' | 'O', playerName: string) => void;
 };
 
-function Player({ initialName, symbol, isActive }: PlayerProps) {
+function Player({ initialName, symbol, isActive, onChangeName }: PlayerProps) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
     setIsEditing((editing) => !editing);
+
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,12 +28,7 @@ function Player({ initialName, symbol, isActive }: PlayerProps) {
 
   if (isEditing) {
     player = (
-      <input
-        type='text'
-        value={playerName}
-        onChange={handleChange}
-        required
-      />
+      <input type='text' value={playerName} onChange={handleChange} required />
     );
     btnCaption = 'Save';
   }
