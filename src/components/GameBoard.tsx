@@ -1,43 +1,14 @@
 import { type CellValue } from '../App';
-import { type Turn } from '../App';
 
 type GameBoardProps = {
   onSelectSquare: (rowIndex: number, colIndex: number) => void;
-  turns: Turn[];
+  board: CellValue[][];
 };
 
-const initialGameBoard: CellValue[][] = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-function GameBoard({ onSelectSquare, turns }: GameBoardProps) {
-  const gameBoard = initialGameBoard;
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
-  }
-  //   const [gameBoard, setGameBoard] = useState<CellValue[][]>(initialGameBoard);
-
-  //   function handleSelectSquare(rowIndex: number, colIndex: number) {
-  //     setGameBoard((prevGameBoard) => {
-  //       const updatedBoard = [
-  //         ...prevGameBoard.map((innerArray) => [...innerArray]),
-  //       ];
-  //       console.log(updatedBoard);
-  //       updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-  //       return updatedBoard;
-  //     });
-
-  //     onSelectSquare();
-  //   }
+function GameBoard({ onSelectSquare, board }: GameBoardProps) {
   return (
     <ol id='game-board'>
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
