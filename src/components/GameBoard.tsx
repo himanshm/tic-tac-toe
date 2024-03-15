@@ -1,4 +1,4 @@
-import { type CellValue } from '../App';
+import { type CellValue } from '../util/helpers';
 
 type GameBoardProps = {
   onSelectSquare: (rowIndex: number, colIndex: number) => void;
